@@ -2,13 +2,14 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 import { FormField, form } from '@angular/forms/signals';
+import { MultiSelect } from './reporting/multi-select';
 import { TransactionApi, TransactionFilters } from './reporting/transaction-api';
 import { TransactionPie } from './reporting/transaction-pie';
 
 const emptyFilters: TransactionFilters = { date: '', providers: [], categories: [] };
 
 @Component({
-  imports: [CurrencyPipe, DatePipe, FormField, TransactionPie],
+  imports: [CurrencyPipe, DatePipe, FormField, MultiSelect, TransactionPie],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',
@@ -67,12 +68,6 @@ export class App {
     }
     return this.report.error() ? 'Could not load transactions.' : '';
   });
-
-  protected toggleFilter(filter: 'providers' | 'categories', option: string, checked: boolean): void {
-    this.filters[filter]().value.update((selected) =>
-      checked ? [...selected, option] : selected.filter((value) => value !== option),
-    );
-  }
 
   protected apply(event: Event): void {
     event.preventDefault();

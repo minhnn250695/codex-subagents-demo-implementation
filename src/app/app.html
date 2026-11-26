@@ -11,34 +11,20 @@
           <label for="transaction-date">Transaction date</label>
           <input id="transaction-date" type="date" [formField]="filters.date" />
         </div>
-        <fieldset>
-          <legend>Providers</legend>
-          @for (provider of api.providers; track provider) {
-            <label class="option">
-              <input
-                #providerOption
-                type="checkbox"
-                [checked]="filters.providers().value().includes(provider)"
-                (change)="toggleFilter('providers', provider, providerOption.checked)"
-              />
-              {{ provider }}
-            </label>
-          }
-        </fieldset>
-        <fieldset>
-          <legend>Categories</legend>
-          @for (category of api.categories; track category) {
-            <label class="option">
-              <input
-                #categoryOption
-                type="checkbox"
-                [checked]="filters.categories().value().includes(category)"
-                (change)="toggleFilter('categories', category, categoryOption.checked)"
-              />
-              {{ category }}
-            </label>
-          }
-        </fieldset>
+        <app-multi-select
+          label="Providers"
+          popoverId="providers-options"
+          [options]="api.providers"
+          [selected]="filters.providers().value()"
+          (selectedChange)="filters.providers().value.set($event)"
+        />
+        <app-multi-select
+          label="Categories"
+          popoverId="categories-options"
+          [options]="api.categories"
+          [selected]="filters.categories().value()"
+          (selectedChange)="filters.categories().value.set($event)"
+        />
       </div>
       <div class="actions">
         <button class="primary" type="submit">Apply</button>

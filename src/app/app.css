@@ -28,8 +28,7 @@ h2 {
   gap: 1.25rem;
 }
 
-.date-field label,
-legend {
+.date-field label {
   display: block;
   margin-bottom: 0.5rem;
   padding: 0;
@@ -44,26 +43,6 @@ input[type='date'] {
   border: 1px solid #8296ab;
   border-radius: 0.375rem;
   color: inherit;
-}
-
-fieldset {
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  border: 0;
-}
-
-.option {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  min-height: 1.75rem;
-  cursor: pointer;
-}
-
-.option input {
-  margin: 0;
-  accent-color: #14546e;
 }
 
 .actions {

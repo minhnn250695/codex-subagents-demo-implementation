@@ -1,0 +1,25 @@
+<span class="label" [id]="popoverId() + '-label'">{{ label() }}</span>
+<button
+  type="button"
+  [attr.popovertarget]="popoverId()"
+  [attr.aria-labelledby]="popoverId() + '-label ' + popoverId() + '-selection'"
+>
+  <span [id]="popoverId() + '-selection'">
+    {{ selected().length ? selected().length + ' selected' : 'All ' + label().toLowerCase() }}
+  </span>
+  <span class="chevron" aria-hidden="true"></span>
+</button>
+
+<div popover="auto" [id]="popoverId()" role="group" [attr.aria-labelledby]="popoverId() + '-label'">
+  @for (option of options(); track option) {
+    <label>
+      <input
+        #checkbox
+        type="checkbox"
+        [checked]="selected().includes(option)"
+        (change)="toggle(option, checkbox.checked)"
+      />
+      {{ option }}
+    </label>
+  }
+</div>
