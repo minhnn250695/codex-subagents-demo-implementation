@@ -1,0 +1,19 @@
+<h2>{{ title() }}</h2>
+@if (status()) {
+  <p class="chart-status">{{ status() }}</p>
+} @else if (slices().length) {
+  <div class="chart">
+    <div class="pie" [style.background]="background()" aria-hidden="true"></div>
+    <ul class="legend" role="list">
+      @for (slice of slices(); track slice.label) {
+        <li>
+          <span class="swatch" [style.background-color]="slice.color" aria-hidden="true"></span>
+          <span>{{ slice.label }}</span>
+          <span class="count">{{ slice.count }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+} @else {
+  <p class="chart-status">No matching transactions.</p>
+}
